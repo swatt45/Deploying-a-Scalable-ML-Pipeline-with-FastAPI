@@ -106,7 +106,7 @@ def performance_on_categorical_slice(
         Trained sklearn OneHotEncoder, only used if training=False.
     lb : sklearn.preprocessing._label.LabelBinarizer
         Trained sklearn LabelBinarizer, only used if training=False.
-    model : ???
+    model : slearn.Ensemble.RandomForestClassifier
         Model used for the task.
 
     Returns
@@ -116,12 +116,14 @@ def performance_on_categorical_slice(
     fbeta : float
 
     """
-    # TODO: implement the function
-    X_slice, y_slice, _, _ = process_data(
-        # your code here
-        # for input data, use data in column given as "column_name", with the slice_value 
-        # use training = False
+    X_slice, y_slice, encoder, lb = process_data(
+        X=column_name, 
+        categorical_features=categorical_features, 
+        label=label, 
+        training=True, 
+        encoder=encoder, 
+        lb=lb
     )
-    preds = # your code here to get prediction on X_slice using the inference function
+    preds = inference(model, X_slice)
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta
