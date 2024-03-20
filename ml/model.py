@@ -23,7 +23,6 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 
-
 def compute_model_metrics(y, preds):
     """
     Validates the trained machine learning model using precision, recall, and F1.
@@ -44,7 +43,6 @@ def compute_model_metrics(y, preds):
     precision = precision_score(y, preds, zero_division=1)
     recall = recall_score(y, preds, zero_division=1)
     return precision, recall, fbeta
-
 
 def inference(model, X):
     """ Run model inferences and return the predictions.
@@ -78,7 +76,6 @@ def load_model(path):
     """ Loads pickle file from `path` and returns it."""
     model = pickle.load(open(path, 'rb'))
     return model
-
 
 def performance_on_categorical_slice(
     data, column_name, slice_value, categorical_features, label, encoder, lb, model
@@ -115,13 +112,26 @@ def performance_on_categorical_slice(
     fbeta : float
     """
     
+
+
+    print('Get slice data from data..')
+    slice = data[data[column_name] == slice_value]
+
+    print(slice.info())
+    print(slice.head(1))
+
+    print('Process sliced data..')
     X_slice, y_slice, encoder, lb = process_data(
-        X=data, 
+        X=slice, 
         categorical_features=categorical_features, 
         label=label, 
+        training=False, 
         encoder=encoder, 
         lb=lb
     )
+
+    print('Infer sliced data..')
     preds = inference(model, X_slice)
+    print('Comute metrics for sliced data..')
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta
