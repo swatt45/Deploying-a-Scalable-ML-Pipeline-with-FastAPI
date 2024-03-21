@@ -14,3 +14,4 @@ dependencies:
   - gunicorn=20.1.0
   - pip=20.3.3
   - git=2.30.2
+  - xgboost==2.0.3

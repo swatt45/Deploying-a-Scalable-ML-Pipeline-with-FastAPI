@@ -1,7 +1,13 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-from sklearn.linear_model import LogisticRegression
+# from sklearn.linear_model import LogisticRegression
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.svm import SVC
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.naive_bayes import GaussianNB
+# from sklearn.neural_network import MLPClassifier
+from xgboost import XGBClassifier
 
 def train_model(X_train, y_train):
     """
@@ -18,7 +24,7 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    model = LogisticRegression()
+    model = XGBClassifier()
     model.fit(X_train, y_train)
     return model
 
