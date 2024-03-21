@@ -1,7 +1,6 @@
 import pickle
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from ml.data import process_data
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 
 def train_model(X_train, y_train):

@@ -1,6 +1,8 @@
 import os
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
+
 from ml.data import process_data
 from ml.model import (
     compute_model_metrics,
@@ -12,6 +14,7 @@ from ml.model import (
 )
 project_path =  os.getcwd()
 data_path = os.path.join(project_path, "data", "census.csv")
+print(data_path)
 data = pd.read_csv(data_path)
 
 train, test = train_test_split(data, test_size=0.3)
@@ -62,6 +65,7 @@ preds = inference(model, X_test)
 
 # Calculate and print the metrics
 p, r, fb = compute_model_metrics(y_test, preds)
+print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}")
 
 # iterate through the categorical features
 for col in cat_features:
