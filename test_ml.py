@@ -98,8 +98,8 @@ def test_predictions_correct_length(dataSet):
     """
     assert len(dataSet.preds)==len(dataSet.test)
 
-def test_precision_recall_f1_greater_than_or_equal_to_zero(dataSet):
+def test_precision_recall_f1_greater_than_zero(dataSet):
     """
-    # Test to make sure X_train and y_train are of same length as training data
+    # Test to ensure that metrics are returned appropriately
     """
-    assert all([dataSet.p >= 0, dataSet.r >=0, dataSet.fb >=0])
+    assert all([dataSet.p > 0, dataSet.r > 0, dataSet.fb > 0])
