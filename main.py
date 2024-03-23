@@ -40,10 +40,9 @@ app = FastAPI()
 @app.get("/")
 async def get_root():
     """ Say hello!"""
-    return {"message": "Hello. Welcome to FastAPI!"}
+    return {"message": "Hello from the API!"}
 
 
-# TODO: create a POST on a different path that does model inference
 @app.post("/data/")
 async def post_inference(data: Data):
     # DO NOT MODIFY: turn the Pydantic model into a dict.
@@ -64,13 +63,14 @@ async def post_inference(data: Data):
         "sex",
         "native-country",
     ]
-    data_processed, y, encoder, lb = process_data(
-            X=data, 
-            categorical_features=cat_features, 
-            label=None, 
-            training=False, 
-            encoder=encoder, 
-            lb=None
+
+    data_processed, y, enc, bin = process_data(
+        data,
+        categorical_features=cat_features,
+        training=False,
+        encoder=encoder,
+        lb=None
     )
+
     _inference = inference(model, data_processed)
     return {"result": apply_label(_inference)}

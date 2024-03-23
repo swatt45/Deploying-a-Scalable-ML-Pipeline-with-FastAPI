@@ -44,7 +44,7 @@ X_test, y_test, encoder, lb = process_data(
     label=label,
     training=False,
     encoder=encoder,
-    lb=lb,
+    lb=lb
 )
 model = train_model(X_train, y_train)
 
