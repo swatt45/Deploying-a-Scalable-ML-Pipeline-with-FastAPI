@@ -30,11 +30,10 @@ cat_features = [
     "sex",
     "native-country",
 ]
-
 label = 'salary'
 
 X_train, y_train, encoder, lb = process_data(
-        X=data, 
+        X=train, 
         categorical_features=cat_features, 
         label=label
     )
