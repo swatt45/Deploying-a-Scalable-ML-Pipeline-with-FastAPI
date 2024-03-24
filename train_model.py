@@ -17,7 +17,7 @@ data_path = os.path.join(project_path, "data", "census.csv")
 print(data_path)
 data = pd.read_csv(data_path)
 
-train, test = train_test_split(data, test_size=0.3)
+train, test = train_test_split(data, test_size=0.3,random_state=42)
 
 # DO NOT MODIFY
 cat_features = [
