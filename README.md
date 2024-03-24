@@ -1,29 +1,26 @@
-Working in a command line environment is recommended for ease of use with git and dvc. If on Windows, WSL1 or 2 is recommended.
-
 # Environment Set up (pip or conda)
 * Option 1: use the supplied file `environment.yml` to create a new environment with conda
 * Option 2: use the supplied file `requirements.txt` to create a new environment with pip
     
-## Repositories
-* Create a directory for the project and initialize git.
-    * As you work on the code, continually commit changes. Trained models you want to use in production must be committed to GitHub.
-* Connect your local git repo to GitHub.
-* Setup GitHub Actions on your repo. You can use one of the pre-made GitHub Actions if at a minimum it runs pytest and flake8 on push and requires both to pass without error.
-    * Make sure you set up the GitHub Action to have the same version of Python as you used in development.
+## How to train / re-train
+* Open a command prompt and type: python train_model.py
+* Wait for the process to finish, and you should see the path of the outputs model and encoder files and the scores printed on the screen.
+* model.pkl and encoder.pkl will be overwritten. These are curretly configured for the model directory.
+* slice_output.txt lists the results of data slicing on the categorical values to see how individual slices score. It lists the slice and the scores.
 
 # Data
-* Download census.csv and commit it to dvc.
-* This data is messy, try to open it in pandas and see what you get.
-* To clean it, use your favorite text editor to remove all spaces.
+* The data is in a CSV file in teh data folder: census.csv
+* See the model_card.md in this directory. It discusses the structure and origin of the data.
+* EDA.ipynb is a jupyter notebook used to perform EDA on the data. You can find this in the data file.
+* In the data folder, a file called census_aequitas, was created in the EDA notebook. It us used to feed to Aequitas for bias analysis.
+* Aequitas - The Bias Report.mhtml is the actual biase report generated during EDA. It is also embedded in the model_card.md.
+* EDA uses ydata-profiling as well to output HTML that can be used to examine the data for abnormalities, patterns, and descriptive stats.
 
-# Model
-* Using the starter code, write a machine learning model that trains on the clean data and saves the model. Complete any function that has been started.
-* Write unit tests for at least 3 functions in the model code.
-* Write a function that outputs the performance of the model on slices of the data.
-    * Suggestion: for simplicity, the function can just output the performance on slices of just the categorical features.
-* Write a model card using the provided template.
+# Testing
+* PyTest is used for running unit tests. 
+* You can add unit tests to the test_ml.py.
+* Run all unit tests using: pytest test_ml.py -v.
 
-# API Creation
-*  Create a RESTful API using FastAPI this must implement:
-    * GET on the root giving a welcome message.
-    * POST that does model inference.
+# API
+* The API was built using FastAPI. 
+* Host FastAPI where you want, and used the local_api.py client to make predictions using the model.
